@@ -123,7 +123,7 @@ ConROC:SpecUpdate()
 	local _VampiricTouch = Shad_Ability.VampiricTouchRank1;
 	local _ShadowWeaving = Player_Buff.ShadowWeavingRank1;
 
-	
+function ConROC:UpdateSpellID()	
 --Ranks
 	if IsSpellKnown(Disc_Ability.DispelMagicRank2) then _DispelMagic = Disc_Ability.DispelMagicRank2; end	
 	
@@ -409,7 +409,8 @@ ConROC:SpecUpdate()
 	VampiricTouch = _VampiricTouch,
 	ShadowWeaving = _ShadowWeaving,
 	}
-
+end
+ConROC:UpdateSpellID()
 
 function ConROC:EnableRotationModule()
 	self.Description = "Priest";
@@ -423,21 +424,11 @@ function ConROC:EnableRotationModule()
 end
 function ConROC:PLAYER_TALENT_UPDATE()
 	ConROC:SpecUpdate();
-	if ConROCSpellmenuFrame:IsVisible() then
-		ConROCSpellmenuFrame_CloseButton:Hide();
-		ConROCSpellmenuFrame_Title:Hide();
-		ConROCSpellmenuClass:Hide();
-		ConROCSpellmenuFrame_OpenButton:Show();
-		optionsOpened = false;
-		ConROCSpellmenuFrame:SetSize((90) + 14, (15) + 14)
-	else
-		ConROCSpellmenuFrame:SetSize((90) + 14, (15) + 14)
-	end
+    ConROC:closeSpellmenu();
 end
 
-
-
 function ConROC.Priest.Damage(_, timeShift, currentSpell, gcd)
+ConROC:UpdateSpellID()
 --Character
 	local plvl		= UnitLevel('player');
 	

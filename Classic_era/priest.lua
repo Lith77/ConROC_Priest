@@ -125,7 +125,8 @@ ConROC:SpecUpdate()
 		local _Shadowguard = Shad_Ability.ShadowguardRank1;
 		--Undead exclusive
 		local _DevouringPlague = Shad_Ability.DevouringPlagueRank1;
-	
+
+function ConROC:UpdateSpellID()
 --Ranks
 --Disc
 	if IsSpellKnown(Disc_Ability.DispelMagicRank2) then _DispelMagic = Disc_Ability.DispelMagicRank2; end	
@@ -390,7 +391,8 @@ ConROC:SpecUpdate()
 		HexofWeakness = _HexofWeakness,
 		Shadowguard = _Shadowguard,
 	}
-
+end
+ConROC:UpdateSpellID()
 
 function ConROC:EnableRotationModule()
 	self.Description = "Priest";
@@ -404,21 +406,11 @@ function ConROC:EnableRotationModule()
 end
 function ConROC:PLAYER_TALENT_UPDATE()
 	ConROC:SpecUpdate();
-	if ConROCSpellmenuFrame:IsVisible() then
-		ConROCSpellmenuFrame_CloseButton:Hide();
-		ConROCSpellmenuFrame_Title:Hide();
-		ConROCSpellmenuClass:Hide();
-		ConROCSpellmenuFrame_OpenButton:Show();
-		optionsOpened = false;
-		ConROCSpellmenuFrame:SetSize((90) + 14, (15) + 14)
-	else
-		ConROCSpellmenuFrame:SetSize((90) + 14, (15) + 14)
-	end
+    ConROC:closeSpellmenu();
 end
 
-
-
 function ConROC.Priest.Damage(_, timeShift, currentSpell, gcd)
+ConROC:UpdateSpellID()
 --Character
 	local plvl		= UnitLevel('player');
 	
