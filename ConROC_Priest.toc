@@ -6,6 +6,6 @@
 ## Dependencies: ConROC
 ## LoadOnDemand: 1
 
-Classic_era\priest_ids.lua
-Classic_era\priest_spellmenu.lua
-Classic_era\priest.lua
+priest_ids.lua
+priest_spellmenu.lua
+priest.lua
